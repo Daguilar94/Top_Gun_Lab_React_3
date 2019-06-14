@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { BASE_LOCAL_ENDPOINT } from "../constants";
 import Character from '../components/Character';
 
 class CharacterList extends Component {
@@ -61,6 +59,7 @@ class CharacterList extends Component {
                 image
             }
         } = this.state;
+
         axios.post(`${BASE_LOCAL_ENDPOINT}/characters`, {
             name,
             location,
@@ -78,6 +77,7 @@ class CharacterList extends Component {
 
     createTextInput = (value, field) => (
         <input
+            required
             type="text"
             placeholder={field}
             onChange={(e) => this.handleInputChange(e.target.value, field)}
@@ -139,3 +139,14 @@ class CharacterList extends Component {
  
 export default CharacterList;
 
+//----------------------------------------------------------------------------------------
+//1. Importar Axios
+
+//2. Importar el endpoint de constants.js
+
+//3. En la function "getCharacters" realiza un llamado al endpoint "http://localhost:3004/characters",
+// (Utiliza la constante que importaste en el paso 2).
+// este endpoint devuelve un arreglo de personajes de la serie Rick and Morty, debes guardar
+// este arreglo en el estado, específicamente en la llave content del objeto characters.
+
+//4. 
