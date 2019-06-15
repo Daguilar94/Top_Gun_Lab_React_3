@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { BASE_LOCAL_ENDPOINT } from "../constants";
 import Character from '../components/Character';
 
@@ -133,9 +132,7 @@ class CharacterList extends Component {
                 </form>
 
                 {content.map(({ id, image, name }) => (
-                    <Link key={id} to={`/characters/${id}`}>
-                        <Character imgSrc={image} name={name}/>
-                    </Link>
+                    <Character key={id} imgSrc={image} name={name}/>
                 ))}
             </>
         );
