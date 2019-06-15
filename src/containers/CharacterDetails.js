@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { BASE_LOCAL_ENDPOINT } from "../constants";
+import { BASE_REMOTE_ENDPOINT } from "../constants";
 import { StyledHeader } from "../components/Home";
 
 const StyledProfile = styled.div`
@@ -29,23 +29,32 @@ class CharacterDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            characterInfo: {},
+            characterInfo: {
+                gender: "",
+                image: "",
+                location: { name: "" },
+                name: "",
+                origin: { name: "" },
+                species: "",
+                status: ""
+            },
             error: ''
         }
     }
 
     componentDidMount = () => {
         const { match: { params: { id } } } = this.props;
-        axios.get(`${BASE_LOCAL_ENDPOINT}/characters/${id}`)
+        axios.get(`${BASE_REMOTE_ENDPOINT}/character/${id}`)
         .then(response => {
             this.setState({
-                characterInfo: response.data,
-                error: ''
+                characterInfo: response.data
             })
         })
         .catch(error => {
             this.setState({
-                error: error.message
+                characters: {
+                    error: error.message
+                }
             })
         })
     }
@@ -55,9 +64,9 @@ class CharacterDetails extends Component {
             characterInfo: {
                 gender,
                 image,
-                location,
+                location: { name: locationName },
                 name,
-                origin,
+                origin: { name: originName },
                 species,
                 status
             }
@@ -70,8 +79,8 @@ class CharacterDetails extends Component {
                     <StyledProfilePic src={image} alt="Character"/>
                     <StyledCharacterInfo>
                         <p><b>Gender: </b>{gender}</p>
-                        <p><b>Location: </b>{location}</p>
-                        <p><b>Origin: </b>{origin}</p>
+                        <p><b>Location: </b>{locationName}</p>
+                        <p><b>Origin: </b>{originName}</p>
                         <p><b>Species: </b>{species}</p>
                         <p><b>Status: </b>{status}</p>
                     </StyledCharacterInfo>
