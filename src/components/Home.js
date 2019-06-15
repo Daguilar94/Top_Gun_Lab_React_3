@@ -1,14 +1,25 @@
 import React from 'react';
 import CharacterList from '../containers/CharacterList';
+import styled from 'styled-components';
+
+const StyledAppContainer = styled.div`
+    text-align: center;
+`;
+
+export const StyledHeader = styled.header`
+    background-color: #222;
+    color: #fff;
+    overflow: auto;
+`;
 
 function Home() {
   return (
-      <div className="AppContainer">
-        <header>
+      <StyledAppContainer>
+        <StyledHeader>
           <h1>Rick and Morty Multiverse</h1>
-        </header>
+        </StyledHeader>
         <CharacterList />
-      </div>
+      </StyledAppContainer>
   );
 }
 
